@@ -16,15 +16,16 @@ def reset():
 
 def check_nul():
     print("Match nul")
-    show_custom_messagebox("Match nul", "La partie est un match nul !")
+    show_custom_messagebox("Match nul", "La partie est un match nul !", "lightgray")
 
 # Function that prints the winner
 def print_winner():
     global win
     if win is False:
         win = True
+        color = "lightgreen" if current_player == "X" else "lightblue"
         print("Le joueur", current_player, "a gagné")
-        show_custom_messagebox("Victoire", f"Le joueur {current_player} a gagné !")
+        show_custom_messagebox("Victoire", f"Le joueur {current_player} a gagné !", color)
 
 # Function that switches the player
 def switch_player():
@@ -35,8 +36,8 @@ def switch_player():
         current_player = "X"
 
 # Function drawing the winning line
-def draw_winning_line(start_x, start_y, end_x, end_y):
-    canvas.create_line(start_x, start_y, end_x, end_y, fill="red", width=5)
+#def draw_winning_line(start_x, start_y, end_x, end_y):
+    #canvas.create_line(start_x, start_y, end_x, end_y, fill="red", width=5)
 
 # Function that checks if there is a winner
 def check_winner(clicked_row, clicked_column):
@@ -106,14 +107,14 @@ def place_symbol(row, column):
         switch_player()
 
 # Function that shows a custom messagebox
-def show_custom_messagebox(title, message):
+def show_custom_messagebox(title, message, color):
 
     custom_box = Toplevel(root)
     custom_box.title(title)
     custom_box.geometry("300x150")
-    custom_box.config(bg="lightblue")
+    custom_box.config(bg=color)
 
-    message_label = tk.Label(custom_box, text=message, bg="lightblue", font=("Arial", 14))
+    message_label = tk.Label(custom_box, text=message, bg=color, font=("Arial", 14))
     message_label.pack(pady=20)
 
     ok_button = tk.Button(custom_box, text="OK", command=custom_box.destroy, font=("Arial", 12))
